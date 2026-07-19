@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+const publications = (await getCollection('publications')).sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
+const lead = publications.filter(({ data }) => data.group === 'lead');
+const collaborative = publications.filter(({ data }) => data.group === 'collaborative');
+---
+<BaseLayout title="Publications" description="Peer-reviewed publications by Tz-Hsuan Tseng in biodiversity conservation, protected areas, spatial planning, and urban ecology.">
+  <PageIntro eyebrow="Publications" title="Peer-reviewed research" intro="Selected publications on conservation planning, protected areas, biodiversity representation, wilderness, and urban bird communities." />
+  <section class="section-shell">
+    <div class="section-heading"><div><p class="eyebrow">Lead-author work</p><h2>Primary research</h2></div></div>
+    <div class="publication-list">
+      {lead.map(({ data }) => <article class="publication-row"><span>{data.year}</span><div><h3>{data.title}</h3><p>{data.authors}</p><p><em>{data.journal}</em>{data.details ? `, ${data.details}` : ''}</p></div>{data.doi && <a class="publication-link" href={data.doi}>DOI ↗</a>}</article>)}
+    </div>
+  </section>
+  <section class="section-shell">
+    <div class="section-heading"><div><p class="eyebrow">Collaborative work</p><h2>Co-authored research</h2></div></div>
+    <div class="publication-list">
+      {collaborative.map(({ data }) => <article class="publication-row"><span>{data.year}</span><div><h3>{data.title}</h3><p>{data.authors}</p><p><em>{data.journal}</em>{data.details ? `, ${data.details}` : ''}</p></div>{data.doi && <a class="publication-link" href={data.doi}>DOI ↗</a>}</article>)}
+    </div>
+  </section>
+</BaseLayout>

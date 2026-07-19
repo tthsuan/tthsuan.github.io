@@ -1,0 +1,17 @@
+---
+interface Props {
+  label: string;
+  detail?: string;
+  aspect?: 'landscape' | 'portrait' | 'wide';
+  tone?: 'forest' | 'sky' | 'earth';
+}
+const { label, detail = 'Personal photograph coming soon', aspect = 'landscape', tone = 'forest' } = Astro.props;
+---
+
+<div class:list={['photo-placeholder', `is-${aspect}`, `tone-${tone}`]} role="img" aria-label={`${label}. ${detail}.`}>
+  <div class="photo-topline"><span>Field frame</span><span>{aspect === 'wide' ? '16:7' : aspect === 'portrait' ? '4:5' : '3:2'}</span></div>
+  <div class="photo-caption">
+    <strong>{label}</strong>
+    <span>{detail}</span>
+  </div>
+</div>

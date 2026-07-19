@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+---
+<BaseLayout title="CV" description="Curriculum vitae, education, experience, awards, service, and skills of Tz-Hsuan Tseng.">
+  <PageIntro eyebrow="Curriculum vitae" title="Background and experience" intro="PhD candidate in Landscape Architecture, conservation researcher, and practitioner working at the intersection of biodiversity science and spatial planning." />
+  <section class="section-shell cv-layout">
+    <aside class="cv-sidebar">
+      <p class="eyebrow">Full document</p>
+      <p>Download the current English curriculum vitae.</p>
+      <a class="button-link" href="/CV_Tz-Hsuan-Tseng.pdf" download>Download CV · PDF</a>
+    </aside>
+    <div>
+      <section class="cv-section">
+        <h2>Current appointments</h2>
+        <div class="timeline-item"><span>2025—Present</span><p><strong>Research Officer</strong>IUCN World Commission on Protected Areas, Chair's Office</p></div>
+        <div class="timeline-item"><span>2022—Present</span><p><strong>PhD Candidate</strong>Landscape Architecture, Tsinghua University · Advisor: Rui Yang</p></div>
+        <div class="timeline-item"><span>2024—2025</span><p><strong>Visiting Assistant in Research</strong>Ecology & Evolutionary Biology, Yale University · Advisor: Walter Jetz</p></div>
+      </section>
+      <section class="cv-section">
+        <h2>Education</h2>
+        <div class="timeline-item"><span>2019—2022</span><p><strong>MSc, Landscape Architecture</strong>Tsinghua University, Beijing</p></div>
+        <div class="timeline-item"><span>2015—2019</span><p><strong>BSc, Geography</strong>Nanjing University, Nanjing</p></div>
+      </section>
+      <section class="cv-section">
+        <h2>Selected talks</h2>
+        <div class="timeline-item"><span>2025</span><p><strong>Hidden suboptimality of cost and area minimization in conservation prioritization</strong>International Congress for Conservation Biology, Brisbane · Best Oral Talk Finalist</p></div>
+        <div class="timeline-item"><span>2025</span><p><strong>The contribution of China's protected areas to terrestrial vertebrate habitat conservation</strong>2nd Conference of China Conservation Biology, Nanchang</p></div>
+        <div class="timeline-item"><span>2023</span><p><strong>Internal structural features of urban green space affect biodiversity</strong>IALE World Congress, Nairobi</p></div>
+      </section>
+      <section class="cv-section">
+        <h2>Selected honours</h2>
+        <div class="timeline-item"><span>2025</span><p><strong>Best Oral Talk Finalist</strong>ICCB Student Awards</p></div>
+        <div class="timeline-item"><span>2025, 2021</span><p><strong>Special Prize Scholarship</strong>Ministry of Education scholarship for students from Hong Kong, Macao, and Taiwan</p></div>
+        <div class="timeline-item"><span>2022</span><p><strong>Outstanding Master's Thesis</strong>School of Architecture, Tsinghua University</p></div>
+        <div class="timeline-item"><span>2019</span><p><strong>Outstanding Undergraduate Thesis</strong>School of Geography and Ocean Science, Nanjing University</p></div>
+      </section>
+      <section class="cv-section">
+        <h2>Service and teaching</h2>
+        <p><strong>Peer review</strong><br />Nature Communications; Communications Earth & Environment; Ecological Indicators; Landscape Ecology; Ecography; Land Degradation & Development.</p>
+        <p><strong>Teaching assistance</strong><br />Practice in Landscape Architecture; Classic Literature in Landscape Architecture; National Parks and Protected Areas of China.</p>
+      </section>
+      <section class="cv-section">
+        <h2>Skills</h2>
+        <p><strong>Programming</strong> · R, Python, Google Earth Engine</p>
+        <p><strong>Spatial and conservation software</strong> · ArcGIS, QGIS, GeoDa, Marxan, Zonation, Fragstats, InVEST, ENVI</p>
+        <p><strong>Methods</strong> · Conservation prioritization, spatial analysis, regression, bird and plant surveys, camera trapping, species distribution models, content analysis</p>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

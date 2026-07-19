@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(projects.map(async (project) => ({ project, rendered: await render(project) })));
+---
+<BaseLayout title="Field & Projects" description="Applied conservation and field projects by Tz-Hsuan Tseng.">
+  <PageIntro eyebrow="Field & projects" title="Research in practice" intro="Selected experiences connecting biodiversity evidence with wildlife monitoring, protected-area planning, community livelihoods, and public engagement." />
+  <section class="section-shell">
+    <div class="project-grid">
+      {rendered.map(({ project, rendered: { Content } }) => (
+        <article class="project-card">
+          <div class="project-meta"><span>{project.data.period}</span><span>{project.data.role}</span>{project.data.location && <span>{project.data.location}</span>}</div>
+          <h2>{project.data.title}</h2>
+          {project.data.partner && <p class="small-muted">Partner / client: {project.data.partner}</p>}
+          <Content />
+          <ul class="tag-list">{project.data.tags.map((tag) => <li>{tag}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

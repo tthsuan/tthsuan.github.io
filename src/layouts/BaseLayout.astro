@@ -1,0 +1,67 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Tz-Hsuan Tseng | Conservation Researcher',
+  description = 'Conservation researcher working across scales on biodiversity planning, protected areas, spatial ecology, and applied conservation.',
+  image,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const pageTitle = title.includes('Tz-Hsuan') ? title : `${title} | Tz-Hsuan Tseng`;
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Tz-Hsuan Tseng',
+  alternateName: '曾子轩',
+  url: 'https://tthsuan.github.io',
+  jobTitle: 'PhD Candidate and Conservation Researcher',
+  affiliation: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Tsinghua University',
+  },
+  sameAs: [
+    'https://github.com/tthsuan',
+    'https://www.linkedin.com/in/tz-hsuan-tseng-1739321b7/',
+    'https://scholar.google.com/citations?user=shNT-aQAAAAJ&hl=en',
+    'https://bgc.yale.edu/people/tz-hsuan-tseng-ms',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#173f35" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{pageTitle}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
