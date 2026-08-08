@@ -2,20 +2,42 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects')).filter(({ data }) => data.featured).sort((a, b) => a.data.order - b.data.order);
 const rendered = await Promise.all(projects.map(async (project) => ({ project, rendered: await render(project) })));
+const publications = await getCollection('publications');
 ---
 <BaseLayout title="Field & Projects" description="Applied conservation and field projects by Tz-Hsuan Tseng.">
-  <PageIntro eyebrow="Field & projects" title="Research in practice" intro="Selected experiences connecting biodiversity evidence with wildlife monitoring, protected-area planning, community livelihoods, and public engagement." />
+  <PageIntro eyebrow="Field & projects" title="Fieldwork and projects" intro="Selected work on campus biodiversity, field surveys, and conservation practice." />
   <section class="section-shell">
     <div class="project-grid">
       {rendered.map(({ project, rendered: { Content } }) => (
         <article class="project-card">
-          <div class="project-meta"><span>{project.data.period}</span><span>{project.data.role}</span>{project.data.location && <span>{project.data.location}</span>}</div>
+          <div class="project-meta">{project.data.period && <span>{project.data.period}</span>}{project.data.role && <span>{project.data.role}</span>}{project.data.location && <span>{project.data.location}</span>}</div>
           <h2>{project.data.title}</h2>
           {project.data.partner && <p class="small-muted">Partner / client: {project.data.partner}</p>}
           <Content />
+          {project.data.images.length > 0 && (
+            <div class="project-image-grid">
+              {project.data.images.map((image) => (
+                <figure>
+                  <img src={image.src} alt={image.alt} loading="lazy" />
+                  {image.caption && <figcaption>{image.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )}
           <ul class="tag-list">{project.data.tags.map((tag) => <li>{tag}</li>)}</ul>
+          {project.data.relatedPublications.length > 0 && (
+            <div class="project-publications">
+              <p class="eyebrow">Related publications</p>
+              {project.data.relatedPublications.map((id) => {
+                const publication = publications.find((item) => item.id === id);
+                return publication && (publication.data.doi
+                  ? <a href={publication.data.doi}>{publication.data.title} ↗</a>
+                  : <span>{publication.data.title}</span>);
+              })}
+            </div>
+          )}
         </article>
       ))}
     </div>

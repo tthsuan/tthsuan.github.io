@@ -7,12 +7,14 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
 }
 
 const {
   title = 'Tz-Hsuan Tseng | Conservation Researcher',
-  description = 'Conservation researcher working across scales on biodiversity planning, protected areas, spatial ecology, and applied conservation.',
-  image,
+  description = 'Conservation research across scales, from global biodiversity planning to field-based practice.',
+  image = '/media/tian-shan-clouds.jpg',
+  imageAlt = 'Clouds over the Tian Shan mountains',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -46,14 +48,17 @@ const personSchema = {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#173f35" />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{pageTitle}</title>
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
-    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   </head>
   <body>

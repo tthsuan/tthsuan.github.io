@@ -1,7 +1,9 @@
 ---
-title: "Notes from the field"
+title: "Gaoligong field route"
 category: "Fieldwork"
-aspect: "wide"
-caption: "Personal fieldwork photograph placeholder · crop recommendation 16:7"
-order: 3
+aspect: "landscape"
+caption: "Gaoligong Mountain, Yunnan"
+image: "/media/gaoligong-field-route.jpg"
+alt: "People walking along a field route in Gaoligong Mountain"
+order: 11
 ---

@@ -2,19 +2,17 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
-import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
 const photos = (await getCollection('photography')).sort((a, b) => a.data.order - b.data.order);
-const tones = ['sky', 'forest', 'earth'] as const;
 ---
 <BaseLayout title="Photography" description="A developing archive of bird, landscape, and fieldwork photography by Tz-Hsuan Tseng.">
-  <PageIntro eyebrow="Photography" title="Birds, landscapes, and field days" intro="A future home for photographs and short observations from the places where conservation becomes tangible." />
+  <PageIntro eyebrow="Photography" title="Birds, landscapes, and fieldwork" intro="Photographs from field sites and other places I have visited." />
   <section class="section-shell">
     <div class="photo-grid">
-      {photos.map(({ data }, index) => (
-        <article class="photo-item">
-          <PhotoPlaceholder label={data.title} detail={data.caption} aspect={data.aspect} tone={tones[index % tones.length]} />
-          <div class="photo-item-text"><p>{data.caption}</p><span class="photo-category">{data.category}</span></div>
-        </article>
+      {photos.map(({ data }) => (
+        <figure class={`photo-item photo-${data.aspect}`}>
+          <img src={data.image} alt={data.alt} loading="lazy" />
+          <figcaption class="photo-item-text"><span>{data.caption}</span><span class="photo-category">{data.category}</span></figcaption>
+        </figure>
       ))}
     </div>
   </section>

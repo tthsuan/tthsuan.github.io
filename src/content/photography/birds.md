@@ -1,7 +1,9 @@
 ---
-title: "Birds in shared landscapes"
+title: "Band-tailed Manakin"
 category: "Birds"
-aspect: "portrait"
-caption: "Personal bird photograph placeholder · crop recommendation 4:5"
-order: 1
+aspect: "landscape"
+caption: "Band-tailed Manakin"
+image: "/media/band-tailed-manakin.jpg"
+alt: "A Band-tailed Manakin perched on a branch"
+order: 6
 ---

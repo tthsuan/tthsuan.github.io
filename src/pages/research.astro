@@ -1,32 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
+import { getCollection } from 'astro:content';
+const themes = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
 ---
-<BaseLayout title="Research" description="Research on protected areas, conservation prioritization, spatial biodiversity analysis, and urban ecology by Tz-Hsuan Tseng.">
-  <PageIntro eyebrow="Research" title="Conservation decisions across scales" intro="My research asks how spatial evidence, quantitative models, and field knowledge can produce more effective and accountable biodiversity conservation." />
-  <section class="section-shell prose-grid">
-    <div class="sticky-label">
-      <p class="eyebrow">Research programme</p>
-      <p>Across these themes, I work mainly with R, Python, Google Earth Engine, GIS, conservation-planning software, field surveys, and camera traps.</p>
-    </div>
-    <article>
-      <h2>Protected areas and conservation effectiveness</h2>
-      <p>Protected areas are central to global biodiversity commitments, yet their contributions vary substantially. I develop and apply spatial indicators to assess how individual protected areas represent species habitats, support connectivity, and contribute to wider conservation systems. This work aims to move evaluation beyond total area toward measurable ecological outcomes.</p>
-
-      <h2>Conservation prioritization</h2>
-      <p>Quantitative prioritization tools influence where limited conservation resources are directed. My current research examines how common objectives—including minimizing area or financial cost—can produce solutions that appear efficient while concealing important ecological trade-offs. I am interested in making model assumptions and decision consequences more transparent.</p>
-
-      <h2>Spatial biodiversity analysis</h2>
-      <p>My work combines species distributions, environmental layers, land-use pressures, ecosystem services, and spatial optimization. I use these data to identify conservation gaps and potential conflicts, and to translate patterns from global or national assessments into information that can support planning and management.</p>
-
-      <h2>Urban biodiversity and human–nature relationships</h2>
-      <p>At local scales, I study how the internal structure of urban green space shapes bird communities. Fieldwork on the Tsinghua University campus has connected repeated bird and vegetation surveys with practical wildlife-friendly management. In the Gaoligong Mountains, I investigated the birding economy to understand how biodiversity conservation intersects with community livelihoods.</p>
-    </article>
-  </section>
-  <section class="section-shell">
-    <p class="eyebrow">Methods and tools</p>
-    <div class="method-strip">
-      <span>Conservation prioritization</span><span>Spatial analysis</span><span>Species distribution modelling</span><span>Regression models</span><span>Bird surveys</span><span>Camera traps</span><span>R</span><span>Python</span><span>Google Earth Engine</span>
+<BaseLayout title="Research" description="Research on protected areas, conservation prioritization, urban biodiversity, and human–nature relationships by Tz-Hsuan Tseng.">
+  <PageIntro eyebrow="Research" title="Conservation research across scales" intro="I study protected areas, conservation prioritization, urban biodiversity, and human–nature relationships." />
+  <section class="section-shell compact-top">
+    <div class="research-grid research-index-grid">
+      {themes.map(({ id, data }, index) => (
+        <a class="research-card" href={`/research/${id}/`}>
+          <span class="research-number">{String(index + 1).padStart(2, '0')}</span>
+          <h2>{data.shortTitle}</h2>
+          <p>{data.summary}</p>
+          <span class="card-arrow" aria-hidden="true">→</span>
+        </a>
+      ))}
     </div>
   </section>
 </BaseLayout>

@@ -1,0 +1,87 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const themes = (await getCollection('research')).sort((a, b) => a.data.order - b.data.order);
+  return themes.map((theme, index) => ({
+    params: { slug: theme.id },
+    props: {
+      theme,
+      previous: themes[(index - 1 + themes.length) % themes.length],
+      next: themes[(index + 1) % themes.length],
+    },
+  }));
+}
+
+const { theme, previous, next } = Astro.props;
+const { Content } = await render(theme);
+const publications = await getCollection('publications');
+const related = theme.data.relatedPublications
+  .map((id: string) => publications.find((publication) => publication.id === id))
+  .filter(Boolean);
+---
+
+<BaseLayout title={theme.data.title} description={theme.data.summary} image={theme.data.images[0]?.src} imageAlt={theme.data.images[0]?.alt}>
+  <article class="research-detail">
+    <header class="research-detail-header section-shell">
+      <p class="eyebrow"><a href="/research/">Research</a> · {String(theme.data.order).padStart(2, '0')}</p>
+      <h1>{theme.data.title}</h1>
+      <p class="page-lede">{theme.data.summary}</p>
+    </header>
+
+    <section class="section-shell research-body">
+      <div class="research-copy"><Content /></div>
+      {theme.data.images.length > 0 && (
+        <div class={`research-image-grid ${theme.data.images.length === 1 ? 'single' : ''}`}>
+          {theme.data.images.map((image) => (
+            <figure>
+              <img src={image.src} alt={image.alt} loading="lazy" />
+              {image.caption && <figcaption>{image.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
+    </section>
+
+    {theme.data.presentation && (
+      <section class="section-shell related-section">
+        <p class="eyebrow">Selected presentation</p>
+        <article class="presentation-card">
+          <span>{theme.data.presentation.year}</span>
+          <div>
+            <h2>{theme.data.presentation.title}</h2>
+            <p>{theme.data.presentation.event} · {theme.data.presentation.location}</p>
+            <div class="inline-links">
+              {theme.data.presentation.links.map((link) => <a href={link.href}>{link.label} ↗</a>)}
+            </div>
+          </div>
+        </article>
+      </section>
+    )}
+
+    {related.length > 0 && (
+      <section class="section-shell related-section">
+        <p class="eyebrow">Related publications</p>
+        <div class="publication-list">
+          {related.map((publication) => publication && (
+            <article class="publication-row">
+              <span>{publication.data.year}</span>
+              <div>
+                <h2>{publication.data.title}</h2>
+                <p>{publication.data.authors}</p>
+                <p><em>{publication.data.journal}</em>{publication.data.details ? `, ${publication.data.details}` : ''}</p>
+              </div>
+              {publication.data.doi && <a class="publication-link" href={publication.data.doi}>DOI ↗</a>}
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <nav class="section-shell theme-nav" aria-label="Research themes">
+      <a href={`/research/${previous.id}/`}><span>Previous</span>{previous.data.shortTitle}</a>
+      <a href={`/research/${next.id}/`}><span>Next</span>{next.data.shortTitle}</a>
+    </nav>
+  </article>
+</BaseLayout>

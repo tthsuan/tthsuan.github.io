@@ -12,11 +12,12 @@ pnpm dev
 ## Updating content
 
 - Publications: `src/content/publications/`
+- Research themes: `src/content/research/`
 - Field projects: `src/content/projects/`
 - Photography entries: `src/content/photography/`
 - Page copy: `src/pages/`
 
-Add personal photographs later by placing optimized image files in `src/assets/` or `public/images/`, then replace the relevant `PhotoPlaceholder` components.
+The published, optimized photographs are stored in `public/media/`. Original photographs remain outside version control in `public/images/`.
 
 ## Deployment
 
