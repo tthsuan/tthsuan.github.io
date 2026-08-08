@@ -5,15 +5,18 @@ summary: "I am interested in how biodiversity conservation relates to human acti
 order: 4
 relatedPublications: ["conflict-risk"]
 images:
-  - src: "/media/sanjiangyuan-dijing-valley.jpg"
-    alt: "A river valley near Dijing Village in Sanjiangyuan National Park"
-    caption: "Dijing, Sanjiangyuan National Park"
-  - src: "/media/sanjiangyuan-ranzhe-glacier.jpg"
-    alt: "Ranzhe Mountain glacier near Dijing Village"
-    caption: "Ranzhe Mountain glacier, Dijing"
+  - src: "/media/gaoligong-bird-blind.jpg"
+    alt: "A bird blind built into a wooded hillside in Gaoligong Mountain"
+    caption: "Bird blind in Gaoligong Mountain"
   - src: "/media/gaoligong-field-route.jpg"
     alt: "People walking along a field route in Gaoligong Mountain"
     caption: "Gaoligong Mountain, Yunnan"
+  - src: "/media/yushu-landscape.jpg"
+    alt: "Mountains and buildings in Yushu, Qinghai"
+    caption: "Yushu, Qinghai"
+  - src: "/media/yushu-ridge-structure.jpg"
+    alt: "A small structure on a grassy ridge in Yushu, Qinghai"
+    caption: "Yushu, Qinghai"
 ---
 
 My field experience in Sanjiangyuan National Park, Gaoligong Mountain, and other parts of China informs my interest in the relationships between biodiversity conservation and human activities.

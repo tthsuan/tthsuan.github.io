@@ -38,6 +38,12 @@ const publications = await getCollection('publications');
               })}
             </div>
           )}
+          {project.data.externalLinks.length > 0 && (
+            <div class="project-links">
+              <p class="eyebrow">Public outreach</p>
+              {project.data.externalLinks.map((link) => <a href={link.href}>{link.label} ↗</a>)}
+            </div>
+          )}
         </article>
       ))}
     </div>

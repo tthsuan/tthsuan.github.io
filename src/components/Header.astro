@@ -1,11 +1,17 @@
 ---
 const pathname = Astro.url.pathname;
 const links = [
-  { href: '/research/', label: 'Research' },
   { href: '/publications/', label: 'Publications' },
   { href: '/projects/', label: 'Field & Projects' },
   { href: '/photography/', label: 'Photography' },
   { href: '/cv/', label: 'CV' },
+];
+const researchLinks = [
+  { href: '/research/', label: 'Research overview' },
+  { href: '/research/protected-area-effectiveness/', label: 'Protected-area effectiveness' },
+  { href: '/research/conservation-prioritization/', label: 'Conservation prioritization' },
+  { href: '/research/urban-biodiversity/', label: 'Urban biodiversity' },
+  { href: '/research/human-nature-relationships/', label: 'Human–nature relationships' },
 ];
 ---
 
@@ -19,6 +25,16 @@ const links = [
       <span aria-hidden="true">☰</span>
     </button>
     <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+      <details class="nav-dropdown">
+        <summary class="nav-summary" aria-current={pathname.startsWith('/research/') ? 'page' : undefined}>
+          Research <span class="dropdown-arrow" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="nav-submenu">
+          {researchLinks.map((link) => (
+            <a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>
+          ))}
+        </div>
+      </details>
       {links.map((link) => (
         <a href={link.href} aria-current={pathname.startsWith(link.href) ? 'page' : undefined}>{link.label}</a>
       ))}
@@ -29,9 +45,37 @@ const links = [
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
   const nav = document.querySelector<HTMLElement>('#site-nav');
+  const dropdown = document.querySelector<HTMLDetailsElement>('.nav-dropdown');
+  const dropdownSummary = dropdown?.querySelector<HTMLElement>('summary');
+
+  const closeMenu = () => {
+    toggle?.setAttribute('aria-expanded', 'false');
+    nav?.classList.remove('is-open');
+  };
+
   toggle?.addEventListener('click', () => {
     const expanded = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!expanded));
     nav?.classList.toggle('is-open', !expanded);
+  });
+
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      dropdown?.removeAttribute('open');
+      closeMenu();
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (dropdown?.open && !dropdown.contains(event.target as Node)) dropdown.removeAttribute('open');
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (dropdown?.open) {
+      dropdown.removeAttribute('open');
+      dropdownSummary?.focus();
+    }
+    closeMenu();
   });
 </script>

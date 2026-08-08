@@ -2,8 +2,8 @@
 title: "Ranzhe Mountain glacier"
 category: "Fieldwork"
 aspect: "portrait"
-caption: "Dijing, Sanjiangyuan National Park"
+caption: "Diqing, Sanjiangyuan National Park"
 image: "/media/sanjiangyuan-ranzhe-glacier.jpg"
-alt: "Ranzhe Mountain glacier above a grassland near Dijing Village"
+alt: "Ranzhe Mountain glacier above a grassland near Diqing Village"
 order: 14
 ---

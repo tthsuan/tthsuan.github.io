@@ -31,6 +31,10 @@ const projects = defineCollection({
       caption: z.string().optional(),
     })).default([]),
     relatedPublications: z.array(z.string()).default([]),
+    externalLinks: z.array(z.object({
+      label: z.string(),
+      href: z.string().url(),
+    })).default([]),
     featured: z.boolean().default(false),
     order: z.number().default(0),
   }),

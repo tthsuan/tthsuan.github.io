@@ -11,7 +11,13 @@ const photos = (await getCollection('photography')).sort((a, b) => a.data.order 
       {photos.map(({ data }) => (
         <figure class={`photo-item photo-${data.aspect}`}>
           <img src={data.image} alt={data.alt} loading="lazy" />
-          <figcaption class="photo-item-text"><span>{data.caption}</span><span class="photo-category">{data.category}</span></figcaption>
+          <figcaption class="photo-item-text">
+            <span class="photo-title-block">
+              <strong>{data.title}</strong>
+              {data.caption !== data.title && <span>{data.caption}</span>}
+            </span>
+            <span class="photo-category">{data.category}</span>
+          </figcaption>
         </figure>
       ))}
     </div>

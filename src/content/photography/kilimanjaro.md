@@ -2,8 +2,8 @@
 title: "Mount Kilimanjaro"
 category: "Landscapes"
 aspect: "landscape"
-caption: "Mount Kilimanjaro, Tanzania"
+caption: "Amboseli National Park, Kenya"
 image: "/media/kilimanjaro.jpg"
-alt: "Mount Kilimanjaro above a savanna landscape"
+alt: "Mount Kilimanjaro viewed across the savanna in Amboseli National Park"
 order: 2
 ---
